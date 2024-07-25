@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'Inscription à CollaboraLink</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            overflow: auto;
+            padding: 30px 0; /* Espace léger en haut et en bas */
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto; /* Centrer la fiche d'inscription */
+            box-sizing: border-box;
+            position: relative;
+        }
+        h1 {
+            display: none; /* Masquer le titre principal */
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 600; /* Semi-bold */
+        }
+        .optional {
+            color: #FF6F00;
+            font-size: 14px;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .progress .step-indicator {
+            width: 100%;
+            height: 5px;
+            background-color: #e0e0e0;
+            position: relative;
+        }
+        .progress .step-indicator .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #007BFF;
+            transition: width 0.3s;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        textarea {
+            resize: none;
+        }
+        .short-text {
+            height: 40px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 12px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .hidden {
+            display: none;
+        }
+        .info-section {
+            background-color: #e9f5ff;
+            border: 1px solid #b3d8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .info-section h3 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+        .info-section p {
+            margin: 0;
+            color: #333;
+        }
+        .confirmation-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="registrationForm">
+            <div class="progress">
+                <div class="step-indicator">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- Étape 1 -->
+            <div class="step step-1 active">
+                <h2>Informations Personnelles <span class="optional">(Recommandé)</span></h2>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="address">Adresse :</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="phone">Numéro de téléphone :</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="email">Adresse e-mail :</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="dob">Date de naissance :</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="step step-2">
+                <h2>Détermination Personnelle <span class="optional">(Recommandé)</span></h2>
+                <label for="goal">Objectif pro principal :</label>
+                <textarea id="goal" name="goal" class="short-text"></textarea>
+
+                <label for="motivation">Pourquoi CollaboraLink ? :</label>
+                <textarea id="motivation" name="motivation" class="short-text"></textarea>
+
+                <label for="strength">Point fort principal :</label>
+                <textarea id="strength" name="strength" class="short-text"></textarea>
+
+                <label for="challenge">Défi majeur surmonté :</label>
+                <textarea id="challenge" name="challenge" class="short-text"></textarea>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="step step-3">
+                <h2>Formation Académique <span class="optional">(Recommandé)</span></h2>
+                <label for="degree">Diplôme obtenu :</label>
+                <input type="text" id="degree" name="degree">
+
+                <label for="institution">Institution :</label>
+                <input type="text" id="institution" name="institution">
+
+                <label for="year-graduated">Année de diplomation :</label>
+                <input type="number" id="year-graduated" name="year-graduated" min="1900" max="2099">
+
+                <label for="achievements">Réalisations :</label>
+                <textarea id="achievements" name="achievements" rows="4"></textarea>
+            </div>
+
+            <!-- Étape 4 -->
+            <div class="step step-4">
+                <h2>Motivations <span class="optional">(Recommandé)</span></h2>
+                <label for="motivation">Décrivez vos motivations :</label>
+                <textarea id="motivation" name="motivation" rows="4"></textarea>
+            </div>
+
+            <!-- Boutons de navigation -->
+            <div class="buttons">
+                <button type="button" id="prevBtn" class="hidden">Étape Précédente</button>
+                <button type="button" id="nextBtn">Prochaine Étape</button>
+                <button type="button" id="submitBtn">Poursuivre</button>
+            </div>
+        </form>
+
+        <!-- Section d’Assurance -->
+        <div class="info-section" id="infoSection">
+            <h3>Assurance de Sécurité</h3>
+            <p>Nous prenons la sécurité de vos données très au sérieux. Vos informations sont stockées en toute sécurité et ne seront jamais partagées avec des tiers sans votre consentement. Vous pouvez compléter votre inscription en toute confiance.</p>
+        </div>
+
+        <!-- Message de confirmation -->
+        <div class="confirmation-message" id="confirmationMessage">
+            <h3>Inscription Réussie !</h3>
+            <p>Votre inscription a bien été réussie. Un conseiller vous contactera dans les 24 heures.</p>
+        </div>
+    </div>
+
+    <script>
+        const totalSteps = 4;
+        let currentStep = 1;
+        const progressBar = document.querySelector('.progress-bar');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+        const infoSection = document.getElementById('infoSection');
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach((stepElement, index) => {
+                stepElement.classList.toggle('active', index + 1 === step);
+            });
+            progressBar.style.width = ((step - 1) / (totalSteps - 1) * 100) + '%';
+            document.getElementById('prevBtn').classList.toggle('hidden', step === 1);
+            document.getElementById('nextBtn').classList.toggle('hidden', step === totalSteps);
+            document.getElementById('submitBtn').classList.toggle('hidden', step !== totalSteps);
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            // Masquer le formulaire et les boutons de navigation
+            document.getElementById('registrationForm').style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            // Masquer la section d’assurance de sécurité
+            infoSection.style.display = 'none';
+            // Afficher le message de confirmation
+            confirmationMessage.style.display = 'block';
+        });
+
+        showStep(currentStep);
+    </script>
+</body>
+</html>
